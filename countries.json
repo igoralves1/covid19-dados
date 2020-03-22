@@ -1,0 +1,42 @@
+[
+  {
+    "name": "Brazil",
+    "code": "bra"
+  },
+  {
+    "name": "Angola",
+    "code": "ago"
+  },
+  {
+    "name": "Mozambique",
+    "code": "moz"
+  },
+  {
+    "name": "Portugal",
+    "code": "prt"
+  },
+  {
+    "name": "Guinea-Bissau",
+    "code": "gnb"
+  },
+  {
+    "name": "East Timor",
+    "code": "tmp"
+  },
+  {
+    "name": "Equatorial Guinea",
+    "code": "gnq"
+  },
+  {
+    "name": "Macao",
+    "code": "mac"
+  },
+  {
+    "name": "Cape Verde",
+    "code": "cpv"
+  },
+  {
+    "name": "São Tomé and Príncipe",
+    "code": "stp"
+  }
+]

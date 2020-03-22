@@ -1,18 +1,27 @@
 <?php declare(strict_types=1);
 
-$countries = ['Brazil', 'Angola', 'Mozambique', 'Portugal', 'Guinea-Bissau', 'East Timor', 'Equatorial Guinea', 'Macau', 'Cape Verde', 'São Tomé and Príncipe'];
+$countries = json_decode(file_get_contents(__DIR__ . '/../countries.json'), true);
 $source = 'https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_19-covid-Confirmed.csv';
 $handle = fopen($source, 'r');
 $header = [];
 
-$outputs = array_map(function (string $country): array {
-    $filename = "casos-confirmados-$country.csv";
-    unlink($filename);
-    return [$country, fopen($filename, 'w')];
+$outputs = array_map(function (array $country): array {
+    $filename = __DIR__."/confirmados/{$country['code']}.csv";
+
+    if (file_exists($filename)) {
+        unlink($filename);
+    }
+
+    return [$country['name'], fopen($filename, 'w')];
 }, $countries);
 
-unlink('casos-confirmados.csv');
-$output_all = fopen('casos-confirmados.csv', 'w');
+$filename_all = __DIR__ . '/confirmados/todos.csv';
+
+if (file_exists($filename_all)) {
+    unlink($filename_all);
+}
+
+$output_all = fopen($filename_all, 'w');
 
 while ($row = fgetcsv($handle)) {
     if (empty($header)) {
