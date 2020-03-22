@@ -33,7 +33,7 @@ while ($row = fgetcsv($handle)) {
         }
     }
 
-    if ($row[1] === $country) {
+    if (in_array($row[1], $countries)) {
         fputcsv($output_all, $row);
     }
 }
