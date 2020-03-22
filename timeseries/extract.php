@@ -1,12 +1,14 @@
 <?php declare(strict_types=1);
 
 $countries = json_decode(file_get_contents(__DIR__ . '/../countries.json'), true);
+$country_names = array_map(fn(array $country): string => $country['name'], $countries);
+
 $source = 'https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_19-covid-Confirmed.csv';
 $handle = fopen($source, 'r');
 $header = [];
 
 $outputs = array_map(function (array $country): array {
-    $filename = __DIR__."/confirmados/{$country['code']}.csv";
+    $filename = __DIR__ . "/confirmados/{$country['code']}.csv";
 
     if (file_exists($filename)) {
         unlink($filename);
@@ -42,7 +44,7 @@ while ($row = fgetcsv($handle)) {
         }
     }
 
-    if (in_array($row[1], $countries)) {
+    if (in_array($row[1], $country_names)) {
         fputcsv($output_all, $row);
     }
 }
